@@ -1,0 +1,354 @@
+" vimrc for terminal
+
+" ---------------- gvim特有
+language zh_HK.utf8
+set langmenu=en
+
+" ---------------- 公共部分
+
+set statusline=%f                           " 文件名
+set statusline+=%h                          " help文件標識
+set statusline+=%m                          " 文件改動標識
+set statusline+=%r                          " 只讀模式標識
+set statusline+=\ [%{&ff}]                  " 文件格式，如Unix、Dos
+set statusline+=\ %{exists('g:loaded_fugitive')?FugitiveStatusline():''}   " Git Repository狀態
+set statusline+=\ (%{strftime(\"%H:%M\ %d/%m/%Y\",getftime(expand(\"%:p\")))})  " 最後修改日期時間戳
+set statusline+=%=                          " 其餘的居右側
+set statusline+=%l,%c%V                     " 行數列數
+set statusline+=\ %P                        " 位置百分比
+
+set showmatch       " 輸入括號后顯示匹配位置
+
+set laststatus=2    " 讓status line留一些空位
+
+set novb            " 不要visual bell閃爍提示
+
+set showmode        " 最後一行顯示vim的mode
+
+set clipboard=unnamed " 可以訪問windows系統剪切板，命令行用不到
+
+set wildmenu " vim命令中按tab顯示單行候選列表，wildmode中的full模式
+set wildmode=list:longest,full " 点击Tab键，将显示可能匹配的文件列表，并使用最长的子串进行补全；再次点击Tab键，可以在wildmenu中遍历匹配的文件列表 https://zhuanlan.zhihu.com/p/87021392
+
+
+" ============== gitbash的vimrc有我自己沒有的，研究用 ===================
+" 命令行都加上，以防萬一
+" ru! defaults.vim                " Use Enhanced Vim defaults
+" aug vimStartup | au! | aug END  " Revert last positioned jump, as it is defined below
+" let g:skip_defaults_vim = 1     " Do not source defaults.vim again (after loading this system vimrc)
+
+" 這個gvim和terminal都不到，命令行加上，以防萬一
+"if &term =~ 'xterm-256color'    " mintty identifies itself as xterm-compatible
+"  if &t_Co == 8
+"    set t_Co = 256              " Use at least 256 colors
+"  endif
+"  " set termguicolors           " Uncomment to allow truecolors on mintty
+"endif
+""------------------------------------------------------------------------------
+" 這個gvim用不到，因爲gvim有fugitive，terminal目前看不出什麽問題，有需要再説，命令行加上，以防萬一
+"" Only do this part when compiled with support for autocommands.
+"if has("autocmd")
+"    " Set UTF-8 as the default encoding for commit messages
+"    autocmd BufReadPre COMMIT_EDITMSG,MERGE_MSG,git-rebase-todo setlocal fileencoding=utf-8
+
+"    " Remember the positions in files with some git-specific exceptions"
+"    autocmd BufReadPost *
+"      \ if line("'\"") > 0 && line("'\"") <= line("$")
+"      \           && &filetype !~# 'commit\|gitrebase'
+"      \           && expand("%") !~ "ADD_EDIT.patch"
+"      \           && expand("%") !~ "addp-hunk-edit.diff" |
+"      \   exe "normal! g`\"" |
+"      \ endif
+
+"      autocmd BufNewFile,BufRead *.patch set filetype=diff
+
+"      autocmd Filetype diff
+"      \ highlight WhiteSpaceEOL ctermbg=red |
+"      \ match WhiteSpaceEOL /\(^+.*\)\@<=\s\+$/
+"endif " has("autocmd")
+" ============== old below ===================
+
+
+set nocompatible
+
+set grepprg=grep\ -n
+
+set guioptions-=m
+set guioptions-=T
+set guioptions-=r
+set guioptions-=L
+map <silent> <F2> :if &guioptions =~# 'T' <Bar>
+        \set guioptions-=T <Bar>
+        \set guioptions-=m <bar>
+        \set guioptions-=r <bar>
+        \set guioptions-=L <bar>
+    \else <Bar>
+        \set guioptions+=T <Bar>
+        \set guioptions+=m <Bar>
+        \set guioptions+=r <Bar>
+        \set guioptions+=L <Bar>
+    \endif<CR>
+
+" set mouse=a       
+
+set number
+set relativenumber
+
+syntax enable
+
+
+set showcmd       
+
+set t_Co=256      
+
+set hlsearch
+
+set guifont=OPPOSans-FiraCode\ 混合体:h11
+set guifontwide=OPPOSans-FiraCode\ 混合体:h12
+set linespace=-1
+
+set tabstop=4 softtabstop=0 expandtab shiftwidth=4 smarttab autoindent
+
+set wrap
+
+set ruler
+
+
+set ignorecase
+
+set smartcase
+
+set noautoread
+
+
+set breakindent
+
+
+
+set display=lastline
+
+set renderoptions=type:directx,renmode:5,taamode:1
+
+set nofoldenable
+set foldmethod=syntax
+
+set formatoptions-=cro
+
+set splitbelow splitright
+
+set incsearch
+
+set signcolumn=yes
+
+set colorcolumn=80
+
+filetype on
+filetype plugin on
+filetype indent on
+
+set backspace=indent,eol,start
+
+set noea
+
+set wildignore+=*/.git/**,*/.svn/**,*/.settings/**,*/.metadata/**,*/node_modules/**,*/build/**,*/target/**
+
+set encoding=utf-8
+set fileencodings=ucs-bom,utf-8,cp936,gb18030,big5,euc-jp,euc-kr,latin1
+
+colorscheme delek
+
+set guicursor=a:blinkon0
+
+hi Pmenu guibg=#e8f4f8
+hi CocMenuSel guibg=LightYellow
+hi CocErrorFloat guifg=DarkRed
+hi CocWarningFloat guifg=DarkMagenta
+hi CocInfoFloat guifg=DarkYellow
+
+au BufRead,BufNewFile *.liquid setfiletype html
+au BufRead,BufNewFile *.njk setfiletype html
+
+set columns=120
+
+set path+=**
+
+augroup quickfix
+    autocmd!
+    autocmd FileType qf setlocal nowrap
+augroup END
+
+augroup fugitive
+    autocmd!
+    autocmd FileType fugitiveblame setlocal nowrap
+augroup END
+
+set shell=D:\kaku\software\Git\bin\bash.exe\ --login\ -i
+
+
+" ============== 插件配置 ===============
+
+call plug#begin('~/vimfiles/plugged')
+
+Plug 'preservim/nerdtree'
+Plug 'iamcco/markdown-preview.nvim', { 'do': { -> mkdp#util#install() }, 'for': ['markdown', 'vim-plug']}
+Plug 'ctrlpvim/ctrlp.vim'
+Plug 'tpope/vim-fugitive'
+Plug 'tpope/vim-commentary'
+Plug 'dense-analysis/ale', { 'for': ['c'] }
+Plug 'neoclide/coc.nvim', {'branch': 'release'}
+Plug 'mbbill/fencview'
+Plug 'tpope/vim-surround'
+Plug 'will133/vim-dirdiff'
+Plug 'fatih/vim-go', { 'do': ':GoUpdateBinaries' }
+
+" Commentary
+" ReplaceWithRegister
+" Titlecase
+" Sort-motion
+" System-copy
+
+call plug#end()
+
+
+let g:ctrlp_working_path_mode = 0
+let g:ctrlp_custom_ignore = {
+    \ 'dir':'\.git$\|\.svn$\|\.settings$\|\.metadata$\|node_modules\|build\|dist\|out\|target\|env\|dist\|build\|__pycache__$',
+    \ 'file': '\.classpath$\|\.project$'
+    \ }
+
+let g:coc_node_path = 'D://kaku//software//node//node-v18.13.0-win-x64//node.exe'
+let g:coc_global_extensions = [
+    \ 'coc-tsserver',
+    \ 'coc-json',
+    \ 'coc-xml',
+    \ 'coc-html',
+    \ 'coc-css',
+    \ 'coc-pyright',
+    \ 'coc-clangd',
+    \ ]
+nnoremap <silent> K :call ShowDocumentation()<CR>
+function! ShowDocumentation()
+    if CocAction('hasProvider', 'hover')
+        call CocActionAsync('doHover')
+    else
+        call feedkeys('K', 'in')
+    endif
+endfunction
+inoremap <silent><expr> <CR> coc#pum#visible() ? coc#pum#confirm() : "\<CR>"
+autocmd CursorHold * silent call CocActionAsync('highlight')
+nmap <silent> gd <Plug>(coc-definition)
+nmap <silent> gy <Plug>(coc-type-definition)
+nmap <silent> gi <Plug>(coc-implementation)
+nmap <silent> gr <Plug>(coc-references)
+nmap <leader>rn <Plug>(coc-rename)
+xmap <leader>f <Plug>(coc-format-selected)
+nmap <leader>f <Plug>(coc-format-selected)
+command! -nargs=0 Format :call CocActionAsync('format')
+command! -nargs=? Fold :call CocAction('fold', <f-args>)
+nnoremap <silent><nowait> <space>a :<C-u>CocList diagnostics<cr>
+nnoremap <silent><nowait> <space>c :<C-u>CocList commands<cr>
+nnoremap <silent><nowait> <space>o :<C-u>CocList outline<cr>
+nnoremap <silent><nowait> <space>s :<C-u>CocList -I symbols<cr>
+function! s:enable_coc_for_filetype()
+    let l:blacklist = ['js', 'jsx', 'ts', 'tsx', 'json', 'xml', 'html', 'htm', 'css', 'py', 'c']
+    if index(l:blacklist, expand('%:e')) != -1
+        let b:coc_enabled = 1
+    else
+        let b:coc_enabled = 0
+    endif
+endfunction
+autocmd BufNew,BufEnter,BufAdd,BufCreate * call s:enable_coc_for_filetype()
+
+let NERDTreeShowBookmarks = 1
+let NERDTreeShowLineNumbers = 1
+
+" set statusline=%<%f\ %h%m%r%{FugitiveStatusline()}%=%-14.(%l,%c%V%)\ %P
+
+let g:DirDiffExcludes = "CVS,*.class,*.exe,.*.swp"
+
+let g:NERDTreeChDirMode = 2
+
+
+" ============== 快捷鍵綁定 ===============
+
+noremap <Up> g<Up>
+noremap <Down> g<Down>
+
+autocmd FileType c noremap <F5> :w <CR> :!gcc % -o %< && %< <CR> <silent>
+
+tnoremap <Esc><Esc> <C-\><C-n>
+
+"can also open explorer from nerdtree by using m-o command
+command OpenContainingFolder :!start explorer /select,%
+
+map <C-0> :NERDTreeToggle<CR>
+
+vnoremap < <gv
+vnoremap > >gv
+
+function! DongLinWenKuScrap()
+    g!/<a.*href=".*"/d
+    :%s/^.\{-}<a.\{-}href="\(.\{-}\)".*$/\1/g 
+    g!/.*\(pdf\|zip\|epub\|doc\|docx\|rar\)/d 
+    :%s/.*\//
+    :%sort u
+endfunction
+command DongLinWenKuScrap call DongLinWenKuScrap()
+" powershell: Get-ChildItem | select Name
+
+
+
+
+" ============== 其他軟件快捷鍵備份參考 ===============
+
+" ### Eclipse的常用快捷鍵
+" 
+" - 快速輸入所有功能Find Actions：`<Ctrl+3>`
+" - 顯示快捷鍵列表Show Key Assist：`<Ctrl+Shift+l>`
+" - 找到Declaration、DeclarationType、Implementation、ReturnType：`<Ctrl>`鼠標懸停
+" - 上一次和下一次編輯的地方Next/Previous Edit Location：`<Ctrl+Alt+Right>`和`<Ctrl+Alt+Left>`
+" - 上一次和下一次的記錄Forward/Backward History：`<Alt+Right>`和`<Alt+Left>`
+" - 格式化Format：`<Ctrl+Shift+f>`
+" - 整理import語句Organize Imports：`<Ctrl+Shift+o>`
+" - 添加刪除注釋Toggle Comment：`<Ctrl+/>`
+" - 複製當前行Copy/Duplicate Lines：`<Ctrl+Alt+Up>`和`<Ctrl+Alt+Down>`
+" - 顯示tab列表Quick Switch Editor：`<Ctrl+e>`和`<Ctrl+Shift+e>`
+" - 切換tab：`<Ctrl+PgUp>`和`<Ctrl+PgDn>`
+" - 移動當前行Move Lines Up/Down：`<Alt+Up>`和`<Alt+Down>`
+" - 跳到某一行Go to Line：`<Ctrl+l>`
+" - 重命名Rename：`<Alt+Shift+r>`
+" - 開啓停止塊編輯Toggle Block Selection：`<Alt+Shift+a>`
+" - 進行自動化生成功能Show Source Quick Menu：`<Alt+Shift+s>`
+" - 分屏Toggle Split Editor：`<Ctrl+{>`和`<Ctrl+_>`
+" - 查找某個資源Open Resource：`<Ctrl+Shift+r>`
+" - 查找某個類Open Type：`<Ctrl+Shift+t>`
+" - 搜索和替換Find and Replace：`<Ctrl+f>`
+" - 多功能搜索Open Search Dialog：`<Ctrl+h>`
+" - 打開繼承關係Open Type Hierarchy：`<F4>`和`<Ctrl+t>`
+" - 打開調用樹關係Open Call Hierarchy：`<Ctrl+Alt+h>`
+" - 打開聲明的位置Declaration in Workspace：`<Ctrl+g>`
+" - 跳轉到函數定義Go to Symbol in File：`<Ctrl+o>`
+" - 打開麵包條Show In Breadcrumb：`<Alt+Shift+b>`
+" - 摺叠Collapse：`<Ctrl+Numpad_Subtract>`，展開Expand是`<Ctrl+Numpad_Add>`
+" - 摺叠所有Collapse All：`<Ctrl+Shift+Numpad_Divide>`，展開全部是`<Ctrl+Shift+Numpad_Multiply>`
+" - 顯示提示信息Content Assist：`<Alt+z>`
+" - 刪除當前行Delete Line：`<Ctrl+d>`
+" - 在括號之間跳轉Matching Character：`<Ctrl+Shift+p>`
+" - 快速搜索Quick Search：`<Ctrl+Alt+Shift+l>`
+" - 選中括號之間的内容：`<Alt+Shift+Up>`和`<Alt+Shift+Down>`
+" - 大小寫To Upper/Lower Case：`<Ctrl+Shift+x>`和`<Ctrl+Shift+y>`
+" 
+" ### DBeaver的常用快捷鍵（只記錄與Eclipse不同的）
+" 
+" - 執行查詢語句Execute SQL Statement：`<Ctrl+Enter>`，新窗口執行`<Ctrl+\>`
+" - 執行查詢脚本（一次性多個語句）Execute SQL Script：`<Alt+x>`，新窗口執行`<Ctrl+Alt+Shift+x>`
+" - 顯示執行計劃Explain Execution Plan：`<Ctrl+Shift+e>`
+"
+" ### Vrapper中常用快捷鍵（爲了與Eclipse快捷鍵的融合）
+"
+" - Eclipse的關閉：取消Close的`<Ctrl+w>`，用Vrapper的`:q`代替，`<Ctrl+w>`用於分屏操作。
+" - Eclipse的複製粘貼：取消Copy的`<Ctrl+c>`和Paste的`<Ctrl+v>`，用Vrapper的`<y>`和`<p>`代替，`<Ctrl+v>`用於visual block模式。
+" - Eclipse的格式化Format：取消Content Format的`<Ctrl+Shift+f>`，避免輸入法繁簡轉化衝突，用`<Ctrl+3>`快捷菜單搜format代替，因爲不常用。
+" - Eclipse的自動提示：將Content Assist的`<Ctrl+Space>`變成`<Alt+x>`，避免輸入法切換衝突。
+" - Eclipse的搜索和替換Find and Replace：取消Find and Replace的`<Ctrl+f>`和Cut的`<Ctrl+x>`，用`<Ctrl+x>`代替
+" - Vrapper的歷史記錄跳轉：`<Ctrl+o>`和`<Ctrl+i>`改用Eclipse的`<Alt+Left>`和`<Alt+Right>`代替
