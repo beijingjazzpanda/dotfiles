@@ -93,16 +93,3 @@ au BufRead,BufNewFile *.njk setfiletype html
 set path+=**
 
 
-" ============== 插件配置 ===============
-
-call plug#begin('~/vimfiles/plugged')
-
-Plug 'preservim/nerdtree'
-Plug 'ctrlpvim/ctrlp.vim'
-Plug 'tpope/vim-fugitive'
-Plug 'tpope/vim-commentary'
-Plug 'tpope/vim-surround'
-Plug 'mbbill/fencview'
-Plug 'will133/vim-dirdiff'
-
-call plug#end()
