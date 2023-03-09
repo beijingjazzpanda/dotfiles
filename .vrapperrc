@@ -1,0 +1,23 @@
+" ============== 目前的配置 ===============
+set hlsearch
+
+set tabstop=4 softtabstop=0 expandtab shiftwidth=4 smarttab autoindent
+
+set ignorecase
+
+set smartcase
+
+set clipboard=unnamed
+
+set incsearch
+
+
+" ============== 插件配置 ===============
+
+
+" ============== 快捷鍵綁定 ===============
+
+vnoremap < <gv
+vnoremap > >gv
+
+" ============== 其他軟件快捷鍵備份參考 ===============
