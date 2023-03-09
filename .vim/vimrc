@@ -1,67 +1,108 @@
-" vimrc for gvim
+" vimrc for terminal
 
-" ---------------- 公共部分
+" ============== 基本配置 ===============
 
-set statusline=%f                           " 文件名
-set statusline+=%h                          " help文件標識
-set statusline+=%m                          " 文件改動標識
-set statusline+=%r                          " 只讀模式標識
-set statusline+=\ [%{&ff}]                  " 文件格式，如Unix、Dos
-set statusline+=\ %{exists('g:loaded_fugitive')?FugitiveStatusline():''}   " Git Repository狀態
-set statusline+=\ (%{strftime(\"%H:%M\ %d/%m/%Y\",getftime(expand(\"%:p\")))})  " 最後修改日期時間戳
-set statusline+=%=                          " 其餘的居右側
-set statusline+=%l,%c%V                     " 行數列數
-set statusline+=\ %P                        " 位置百分比
+set nocompatible
 
-set mouse=a         " 使用鼠標，gvim默認就是，不用配置
+set statusline=%f
+set statusline+=%h
+set statusline+=%m
+set statusline+=%r
+set statusline+=\ [%{&ff}]
+set statusline+=\ %{exists('g:loaded_fugitive')?FugitiveStatusline():''}
+set statusline+=\ (%{strftime(\"%H:%M\ %d/%m/%Y\",getftime(expand(\"%:p\")))})
+set statusline+=%=
+set statusline+=%l,%c%V
+set statusline+=\ %P
 
-set showmatch       " 輸入括號后顯示匹配位置
+set mouse=a
 
-set laststatus=2    " 讓status line留一些空位
+set showmatch
 
-set novb            " 不要visual bell閃爍提示
+set laststatus=2
 
-set showmode        " 最後一行顯示vim的mode
+set novb
 
-set clipboard=unnamed " 可以訪問windows系統剪切板，命令行用不到
+set showmode
+set showcmd       
 
-set wildmenu " vim命令中按tab顯示單行候選列表，wildmode中的full模式
-set wildmode=list:longest,full " 点击Tab键，将显示可能匹配的文件列表，并使用最长的子串进行补全；再次点击Tab键，可以在wildmenu中遍历匹配的文件列表 https://zhuanlan.zhihu.com/p/87021392
+set clipboard=unnamed
 
-" ---------------- terminal特有
-"
-"
-"
-" ------------------- gitbash自帶的vim加上，以防vm中缺失
+set wildmenu
+set wildmode=list:longest,full
 
-ru! defaults.vim                " Use Enhanced Vim defaults
-aug vimStartup | au! | aug END  " Revert last positioned jump, as it is defined below
-let g:skip_defaults_vim = 1     " Do not source defaults.vim again (after loading this system vimrc)
+set number
+set relativenumber
 
-if &term =~ 'xterm-256color'    " mintty identifies itself as xterm-compatible
-  if &t_Co == 8
-    set t_Co = 256              " Use at least 256 colors
-  endif
-  " set termguicolors           " Uncomment to allow truecolors on mintty
-endif
-"------------------------------------------------------------------------------
-" Only do this part when compiled with support for autocommands.
-if has("autocmd")
-    " Set UTF-8 as the default encoding for commit messages
-    autocmd BufReadPre COMMIT_EDITMSG,MERGE_MSG,git-rebase-todo setlocal fileencoding=utf-8
+syntax enable
 
-    " Remember the positions in files with some git-specific exceptions"
-    autocmd BufReadPost *
-      \ if line("'\"") > 0 && line("'\"") <= line("$")
-      \           && &filetype !~# 'commit\|gitrebase'
-      \           && expand("%") !~ "ADD_EDIT.patch"
-      \           && expand("%") !~ "addp-hunk-edit.diff" |
-      \   exe "normal! g`\"" |
-      \ endif
+set hlsearch
 
-      autocmd BufNewFile,BufRead *.patch set filetype=diff
+set tabstop=4 softtabstop=0 expandtab shiftwidth=4 smarttab autoindent breakindent
 
-      autocmd Filetype diff
-      \ highlight WhiteSpaceEOL ctermbg=red |
-      \ match WhiteSpaceEOL /\(^+.*\)\@<=\s\+$/
-endif " has("autocmd")
+set wrap
+augroup withoutwrap
+    autocmd!
+    autocmd FileType qf,fugitiveblame setlocal nowrap
+augroup END
+
+set ignorecase
+set smartcase
+
+set noautoread
+
+set display=lastline
+
+set nofoldenable
+set foldmethod=syntax
+
+set formatoptions=r
+
+set splitbelow splitright
+
+set incsearch
+
+set signcolumn=yes
+
+set colorcolumn=80
+
+filetype plugin indent on
+
+set backspace=indent,eol,start
+
+set noea
+
+set wildignore+=*/.git/**,*/.svn/**,*/.settings/**,*/.metadata/**,*/node_modules/**,*/build/**,*/target/**
+
+set encoding=utf-8
+set fileencodings=ucs-bom,utf-8,cp936,gb18030,big5,euc-jp,euc-kr,latin1
+
+colorscheme delek
+
+set guicursor=a:blinkon0
+
+hi Pmenu guibg=#e8f4f8
+hi CocMenuSel guibg=LightYellow
+hi CocErrorFloat guifg=DarkRed
+hi CocWarningFloat guifg=DarkMagenta
+hi CocInfoFloat guifg=DarkYellow
+
+au BufRead,BufNewFile *.liquid setfiletype html
+au BufRead,BufNewFile *.njk setfiletype html
+
+set path+=**
+
+
+" ============== 插件配置 ===============
+
+call plug#begin('~/vimfiles/plugged')
+
+Plug 'preservim/nerdtree'
+Plug 'ctrlpvim/ctrlp.vim'
+Plug 'tpope/vim-fugitive'
+Plug 'tpope/vim-commentary'
+Plug 'tpope/vim-surround'
+Plug 'mbbill/fencview'
+Plug 'will133/vim-dirdiff'
+
+call plug#end()
