@@ -34,8 +34,6 @@ set wildmode=list:longest,full
 set number
 set relativenumber
 
-syntax enable
-
 set hlsearch
 
 set tabstop=4 softtabstop=0 expandtab shiftwidth=4 smarttab autoindent breakindent
@@ -76,8 +74,6 @@ set wildignore+=*/.git/**,*/.svn/**,*/.settings/**,*/.metadata/**,*/node_modules
 
 set encoding=utf-8
 set fileencodings=ucs-bom,utf-8,cp936,gb18030,big5,euc-jp,euc-kr,latin1
-
-colorscheme delek
 
 set guicursor=a:blinkon0
 

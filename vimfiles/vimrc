@@ -53,8 +53,6 @@ map <silent> <F2> :if &guioptions =~# 'T' <Bar>
 set number
 set relativenumber
 
-syntax enable
-
 set hlsearch
 
 set guifont=OPPOSans-FiraCode\ 混合体:h11
