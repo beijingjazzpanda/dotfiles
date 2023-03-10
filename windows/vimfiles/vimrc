@@ -1,7 +1,7 @@
 " vimrc for gvim
 
 " ============== 基本配置 ===============
-
+dsadsadsadas
 set nocompatible
 
 language zh_HK.utf8
@@ -17,7 +17,7 @@ set statusline+=\ (%{strftime(\"%H:%M\ %d/%m/%Y\",getftime(expand(\"%:p\")))})
 set statusline+=%=
 set statusline+=%l,%c%V
 set statusline+=\ %P
-
+dsadsad
 set showmatch
 
 set laststatus=2
@@ -80,7 +80,7 @@ set renderoptions=type:directx,renmode:5,taamode:1
 set nofoldenable
 set foldmethod=syntax
 
-set formatoptions=r
+set formatoptions+=r
 
 set splitbelow splitright
 
@@ -118,7 +118,7 @@ set columns=120
 
 set path+=**
 
-set shell=D:\kaku\software\Git\bin\bash.exe\ --login\ -i
+exe "set shell=".$HOME.'\root\software\Git\bin\bash.exe\ --login\ -i'
 
 
 " ============== 插件配置 ===============

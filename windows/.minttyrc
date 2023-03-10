@@ -1,5 +1,7 @@
-FontHeight=14
-Font=Sarasa Mono TC
+FontHeight=11
+Font=OPPOSans-FiraCode Hybrid
 ThemeFile=kohlrausch
 CursorType=block
 Transparency=off
+Locale=zh_HK
+Charset=UTF-8
