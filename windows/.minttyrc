@@ -5,3 +5,4 @@ CursorType=block
 Transparency=off
 Locale=zh_HK
 Charset=UTF-8
+Term=xterm-256color

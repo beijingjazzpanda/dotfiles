@@ -1,0 +1,44 @@
+" vimrc for windows gvim
+
+set langmenu=en
+
+colorscheme delek
+
+set columns=120
+
+set renderoptions=type:directx,renmode:5,taamode:1
+
+set guifont=OPPOSans-FiraCode\ 混合体:h11
+set guifontwide=OPPOSans-FiraCode\ 混合体:h12
+
+" toggle vim menu
+set guioptions-=m
+set guioptions-=T
+set guioptions-=r
+set guioptions-=L
+map <silent> <F2> :if &guioptions =~# 'T' <Bar>
+        \set guioptions-=T <Bar>
+        \set guioptions-=m <bar>
+        \set guioptions-=r <bar>
+        \set guioptions-=L <bar>
+    \else <Bar>
+        \set guioptions+=T <Bar>
+        \set guioptions+=m <Bar>
+        \set guioptions+=r <Bar>
+        \set guioptions+=L <Bar>
+    \endif<CR>
+
+" toggle full screen
+let s:fullscreen = 0
+function! ToggleFullScreen()
+    if s:fullscreen
+        sim ~r
+        let s:fullscreen = 0
+    else
+        sim ~x
+        let s:fullscreen = 1
+    endif
+endfunction
+map <F11> :call ToggleFullScreen()<CR>
+
+

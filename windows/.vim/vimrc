@@ -1,6 +1,4 @@
-" vimrc for terminal
-
-" ============== 基本配置 ===============
+" vimrc for gitbash
 
 set nocompatible
 
@@ -14,8 +12,6 @@ set statusline+=\ (%{strftime(\"%H:%M\ %d/%m/%Y\",getftime(expand(\"%:p\")))})
 set statusline+=%=
 set statusline+=%l,%c%V
 set statusline+=\ %P
-
-set mouse=a
 
 set showmatch
 
@@ -54,8 +50,6 @@ set display=lastline
 set nofoldenable
 set foldmethod=syntax
 
-set formatoptions=r
-
 set splitbelow splitright
 
 set incsearch
@@ -75,17 +69,15 @@ set wildignore+=*/.git/**,*/.svn/**,*/.settings/**,*/.metadata/**,*/node_modules
 set encoding=utf-8
 set fileencodings=ucs-bom,utf-8,cp936,gb18030,big5,euc-jp,euc-kr,latin1
 
-set guicursor=a:blinkon0
-
-hi Pmenu guibg=#e8f4f8
-hi CocMenuSel guibg=LightYellow
-hi CocErrorFloat guifg=DarkRed
-hi CocWarningFloat guifg=DarkMagenta
-hi CocInfoFloat guifg=DarkYellow
-
 au BufRead,BufNewFile *.liquid setfiletype html
 au BufRead,BufNewFile *.njk setfiletype html
 
 set path+=**
 
+" avoid path error when open vim from gitbash launched in vim terminal
+if stridx($VIM, '/') == 0
+    syntax on
+endif
+
+set mouse=a
 
