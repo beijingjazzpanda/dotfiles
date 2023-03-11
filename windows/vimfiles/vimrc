@@ -80,3 +80,5 @@ exe "set shell=".$HOME.'\root\software\Git\bin\bash.exe\ --login\ -i'
 set grepprg=grep\ -n
 
 language zh_HK.utf8
+
+:autocmd InsertEnter,InsertLeave * set cul!
