@@ -81,4 +81,3 @@ set grepprg=grep\ -n
 
 language zh_HK.utf8
 
-:autocmd InsertEnter,InsertLeave * set cul!
