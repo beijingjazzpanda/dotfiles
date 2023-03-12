@@ -1,7 +1,9 @@
 alias python="winpty python.exe"
 
 alias vim="vim -N"
-alias lynx="lynx -lss=~/lynx-light.lss -display_charset=utf8"
+alias '?'=duck
+alias '??'=google
+alias '???'=bing
 
 alias pushall="git pull && git add . && git commit -m 'update' && git push"
 

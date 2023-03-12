@@ -80,3 +80,5 @@ if stridx($VIM, '/') == 0
 endif
 
 set mouse=a
+
+colorscheme shine
