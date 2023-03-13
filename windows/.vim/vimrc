@@ -81,4 +81,4 @@ endif
 
 set mouse=a
 
-colorscheme shine
+silent! colorscheme shine
